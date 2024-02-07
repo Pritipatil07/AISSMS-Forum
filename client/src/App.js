@@ -4,8 +4,11 @@ import SendIcon from "@mui/icons-material/Send";
 import ReplyIcon from "@mui/icons-material/Reply";
 import TopicIcon from "@mui/icons-material/Topic";
 import SearchIcon from "@mui/icons-material/Search";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function App() {
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+
   return (
     <div className="bg-[#EAEAEA]">
       <nav className="bg-[#364253] text-white flex justify-between items-center px-5">
@@ -23,7 +26,11 @@ function App() {
             <a href="/">DEPARTMENTS</a>
           </li>
         </ul>
-        <button className="bg-[#1D84B5] px-5 py-2">LOGIN</button>
+        {
+          isAuthenticated ? (<button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} className="bg-[#1D84B5] px-5 py-2">LOGOUT</button>)
+          : (<button onClick={() => loginWithRedirect()} className="bg-[#1D84B5] px-5 py-2">LOGIN</button>)
+        }
+        
       </nav>
       <div className="bg-[#364253] h-screen w-full flex flex-col gap-5 justify-center items-center p-5">
         <p className=" text-white text-3xl md:text-5xl font-semibold text-center">
