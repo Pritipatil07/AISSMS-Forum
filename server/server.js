@@ -10,9 +10,6 @@ app.get("/", (req, res) => {
   res.send("hello");
 });
 
-await mongoose.connect(process.env.DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+
 
 app.listen(port);
